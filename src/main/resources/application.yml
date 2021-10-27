@@ -1,0 +1,32 @@
+server:
+  port: 9002
+
+spring:
+  application:
+    name: STUDENT-SERVICE
+
+eureka:
+  client:
+    register-with-eureka:
+      value: true
+    fetch-registry:
+      value: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+    instance:
+      hostname: localhost
+
+resilience4j:
+  retry:
+    config:
+      instances:
+        basic:
+          maxRetryAttemps: 3
+          waitDuration: 1s
+
+  ratelimiter:
+    instances:
+      limitbasic:
+        limitForPeriod: 2
+        limitRefreshPeriod: 5s
+        timeoutDuration: 1
